@@ -79,4 +79,56 @@ docker container inspect volume
 docker volume ls
 
 
+# WORKING DIRECTORY Instruction
+docker build -t tadeususman/workdir workdir
 
+docker container create --name workdir -p 8080:8080 tadeususman/workdir
+docker container start workdir
+docker container exec -i -t workdir /bin/sh
+
+#USER Instruction
+docker build -t tadeususman/user user
+
+docker container create --name user -p 8080:8080 tadeususman/user
+docker container start user
+docker container exec -i -t user /bin/sh
+
+
+#ARG Instruction
+docker build -t tadeususman/arg arg --build-arg app=tad
+
+docker container create --name arg -p 8080:8080 tadeususman/arg
+docker container start arg
+curl localhost:8080
+docker container exec -i -t arg /bin/sh
+
+
+#HEALTH Instruction
+docker build -t tadeususman/health health
+
+docker container create --name health -p 8080:8080 tadeususman/health
+docker container start health
+curl localhost:8080
+docker container exec -i -t health /bin/sh
+
+
+#ENTRYPOINT Instruction
+docker build -t tadeususman/entrypoint entrypoint
+
+docker image inspect tadeususman/entrypoint
+
+docker container create --name entrypoint -p 8080:8080 tadeususman/entrypoint
+docker container start entrypoint
+curl localhost:8080
+docker container exec -i -t entrypoint /bin/sh
+
+
+
+
+#MULTI Instruction
+docker build -t tadeususman/multi multi
+docker image ls
+docker container create --name multi -p 8080:8080 tadeususman/multi
+docker container start multi
+curl localhost:8080
+docker container exec -i -t multi /bin/sh
